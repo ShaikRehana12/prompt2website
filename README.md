@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Prompt2websiteFrontend
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.20.
@@ -57,3 +58,7 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+=======
+# prompt2website
+Prompt2Website is an AI-powered code generator that turns natural language prompts and user-selected tech stacks into complete, end-to-end web project structures and code. Built with a Spring Boot backend and an Angular frontend, it bridges the gap between ideation and developer scaffolding.
+>>>>>>> f2e9a116455f2f813545bc3b95f5dd2e232d1169
