@@ -1,21 +1,19 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-auth',
+  selector: 'app-login',
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './auth.html',
-  styleUrl: './auth.css'
+  imports: [CommonModule, RouterLink],
+  templateUrl: './login.html',
+  styleUrl: './login.css'
 })
-export class AuthComponent {
-  
+export class LoginComponent {
   constructor(private router: Router) {}
 
   onLogin(event: Event) {
     event.preventDefault();
-    // Perform authentication logic here, then redirect:
     this.router.navigate(['/dashboard']);
   }
 }

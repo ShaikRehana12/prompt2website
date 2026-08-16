@@ -1,26 +1,86 @@
-<!-- <p>dashboard works!</p> -->
-<div class="dashboard-container">
-  <h2>Prompt2Website Generator</h2>
-  
-  <div class="form-group">
-    <label>Select Frontend Stack:</label>
-    <select>
-      <!-- <option value="angular">Angular</option> -->
-     <option value="angular">Angular</option>
-    </select>
-  </div>
+<div class="dashboard-wrapper">
+  <!-- Top Navigation Header with Logo -->
+  <header class="dashboard-header">
+    <h2 class="brand-logo">Prompt<span>2</span>Website</h2>
+    <button class="logout-btn" routerLink="/">Sign Out</button>
+  </header>
 
-  <div class="form-group">
-    <label>Select Backend Stack:</label>
-    <select>
-      <option value="springboot">Spring Boot (Java)</option>
-    </select>
-  </div>
+  <div class="dashboard-card">
+    <h2>AI Project Generator</h2>
+    <p class="subtext">Select your target architecture and describe your project requirement.</p>
 
-  <div class="form-group">
-    <label>Enter Project Idea / Prompt:</label>
-    <textarea rows="4" placeholder="Describe your web application..."></textarea>
-  </div>
+    <!-- Frontend Selection -->
+    <div class="form-group">
+      <label>Select Frontend Technology:</label>
+      <select>
+        <optgroup label="JavaScript / TypeScript Frameworks">
+          <option value="angular">Angular (TypeScript)</option>
+          <option value="react">React.js</option>
+          <option value="nextjs">Next.js (React SSR)</option>
+          <option value="vue">Vue.js</option>
+          <option value="nuxt">Nuxt.js (Vue SSR)</option>
+          <option value="svelte">Svelte / SvelteKit</option>
+          <option value="solid">SolidJS</option>
+        </optgroup>
+        <optgroup label="Mobile / Cross-Platform">
+          <option value="react-native">React Native</option>
+          <option value="flutter-web">Flutter Web</option>
+        </optgroup>
+        <optgroup label="Traditional / CSS Frameworks">
+          <option value="html-css-js">Vanilla HTML5 / CSS3 / JavaScript</option>
+          <option value="tailwind">HTML + Tailwind CSS</option>
+          <option value="bootstrap">HTML + Bootstrap 5</option>
+        </optgroup>
+      </select>
+    </div>
 
-  <button class="generate-btn">Generate Project</button>
+    <!-- Backend Selection -->
+    <div class="form-group">
+      <label>Select Backend Technology:</label>
+      <select>
+        <optgroup label="Java Ecosystem">
+          <option value="springboot">Spring Boot (Java)</option>
+          <option value="quarkus">Quarkus (Java)</option>
+          <option value="micronaut">Micronaut (Java)</option>
+        </optgroup>
+        <optgroup label="Node.js & JavaScript">
+          <option value="nodejs-express">Node.js (Express.js)</option>
+          <option value="nestjs">NestJS (TypeScript)</option>
+          <option value="fastify">Fastify (Node.js)</option>
+        </optgroup>
+        <optgroup label="Python Ecosystem">
+          <option value="fastapi">FastAPI (Python)</option>
+          <option value="django">Django (Python)</option>
+          <option value="flask">Flask (Python)</option>
+        </optgroup>
+        <optgroup label="Other Languages">
+          <option value="go-gin">Go (Gin / Fiber)</option>
+          <option value="csharp-dotnet">C# (.NET Core Web API)</option>
+          <option value="php-laravel">PHP (Laravel)</option>
+          <option value="ruby-rails">Ruby on Rails</option>
+        </optgroup>
+      </select>
+    </div>
+
+    <!-- Database Selection -->
+    <div class="form-group">
+      <label>Select Database & ORM:</label>
+      <select>
+        <option value="mysql">MySQL / Hibernate JPA</option>
+        <option value="postgresql">PostgreSQL / Prisma / TypeORM</option>
+        <option value="mongodb">MongoDB / Mongoose</option>
+        <option value="h2">H2 Database (In-Memory)</option>
+        <option value="sqlite">SQLite</option>
+        <option value="firebase">Firebase Firestore</option>
+      </select>
+    </div>
+
+    <!-- Prompt Input -->
+    <div class="form-group">
+      <label>Project Idea / Prompt:</label>
+      <textarea rows="4" placeholder="E.g., Build an e-commerce platform for handmade crafts with secure user authentication, product catalog filtering, cart management, and order checkout tracking..."></textarea>
+    </div>
+
+    <button class="primary-btn">Generate End-to-End Project Code</button>
+  </div>
 </div>

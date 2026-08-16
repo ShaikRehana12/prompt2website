@@ -10,6 +10,10 @@
       <label>Password</label>
       <input type="password" placeholder="Enter password" required />
     </div>
-    <button type="submit" class="auth-btn">Sign In / Register</button>
+    <!-- <button type="submit" class="auth-btn">Sign In / Register</button> -->
+    <form (submit)="onLogin($event)">
+  <!-- inputs here -->
+  <button type="submit" class="auth-btn">Sign In / Register</button>
+</form>
   </form>
 </div>

@@ -1,8 +1,10 @@
 import { Routes } from '@angular/router';
-import { AuthComponent } from './components/auth/auth'; // Adjust to './components/auth/auth.component' if using that naming convention
+import { LoginComponent } from './components/login/login';
+import { RegisterComponent } from './components/register/register';
 import { DashboardComponent } from './components/dashboard/dashboard';
 
 export const routes: Routes = [
-  { path: '', component: AuthComponent },
-  { path: 'dashboard', component: DashboardComponent }
+  { path: '', component: LoginComponent },            // Default Landing (Sign In)
+  { path: 'register', component: RegisterComponent },  // Create Account page
+  { path: 'dashboard', component: DashboardComponent }// Main Generator Dashboard
 ];
