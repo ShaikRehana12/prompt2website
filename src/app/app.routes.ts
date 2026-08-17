@@ -4,7 +4,7 @@ import { RegisterComponent } from './components/register/register';
 import { DashboardComponent } from './components/dashboard/dashboard';
 
 export const routes: Routes = [
-  { path: '', component: LoginComponent },            // Default Landing (Sign In)
-  { path: 'register', component: RegisterComponent },  // Create Account page
-  { path: 'dashboard', component: DashboardComponent }// Main Generator Dashboard
+  { path: '', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'dashboard', component: DashboardComponent }
 ];

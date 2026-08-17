@@ -1,86 +1,139 @@
-<div class="dashboard-wrapper">
-  <!-- Top Navigation Header with Logo -->
-  <header class="dashboard-header">
-    <h2 class="brand-logo">Prompt<span>2</span>Website</h2>
-    <button class="logout-btn" routerLink="/">Sign Out</button>
+<div class="app-layout">
+  <!-- Top Navigation Header -->
+  <header class="navbar">
+    <div class="brand-logo">Prompt<span>2</span>Website</div>
+    <div class="nav-right">
+      <span class="user-badge">Workspace: Pro</span>
+      <button class="logout-btn" routerLink="/">Sign Out</button>
+    </div>
   </header>
 
-  <div class="dashboard-card">
-    <h2>AI Project Generator</h2>
-    <p class="subtext">Select your target architecture and describe your project requirement.</p>
+  <!-- Main Content Area -->
+  <main class="main-container">
+    <div class="generator-card" *ngIf="!isGenerating && !isCompleted">
+      <div class="card-header">
+        <h2>AI Full-Stack Generator</h2>
+        <p>Build your application step-by-step with enterprise-grade tech stacks.</p>
+      </div>
 
-    <!-- Frontend Selection -->
-    <div class="form-group">
-      <label>Select Frontend Technology:</label>
-      <select>
-        <optgroup label="JavaScript / TypeScript Frameworks">
-          <option value="angular">Angular (TypeScript)</option>
-          <option value="react">React.js</option>
-          <option value="nextjs">Next.js (React SSR)</option>
-          <option value="vue">Vue.js</option>
-          <option value="nuxt">Nuxt.js (Vue SSR)</option>
-          <option value="svelte">Svelte / SvelteKit</option>
-          <option value="solid">SolidJS</option>
-        </optgroup>
-        <optgroup label="Mobile / Cross-Platform">
-          <option value="react-native">React Native</option>
-          <option value="flutter-web">Flutter Web</option>
-        </optgroup>
-        <optgroup label="Traditional / CSS Frameworks">
-          <option value="html-css-js">Vanilla HTML5 / CSS3 / JavaScript</option>
-          <option value="tailwind">HTML + Tailwind CSS</option>
-          <option value="bootstrap">HTML + Bootstrap 5</option>
-        </optgroup>
-      </select>
+      <!-- Step 1: Frontend Technology -->
+      <div class="section-group">
+        <label class="section-title">Step 1: Select Frontend Framework</label>
+        <div class="tech-grid">
+          <div class="tech-card" [class.selected]="selectedFrontend === 'Angular'" (click)="selectTech('frontend', 'Angular')">
+            <span class="tech-title">Angular</span>
+            <span class="tech-desc">TypeScript Enterprise SPA</span>
+          </div>
+          <div class="tech-card" [class.selected]="selectedFrontend === 'React.js'" (click)="selectTech('frontend', 'React.js')">
+            <span class="tech-title">React.js</span>
+            <span class="tech-desc">Modern Component UI</span>
+          </div>
+          <div class="tech-card" [class.selected]="selectedFrontend === 'Next.js'" (click)="selectTech('frontend', 'Next.js')">
+            <span class="tech-title">Next.js</span>
+            <span class="tech-desc">React SSR & SEO Optimized</span>
+          </div>
+          <div class="tech-card" [class.selected]="selectedFrontend === 'Vue.js'" (click)="selectTech('frontend', 'Vue.js')">
+            <span class="tech-title">Vue.js</span>
+            <span class="tech-desc">Progressive Framework</span>
+          </div>
+          <div class="tech-card" [class.selected]="selectedFrontend === 'Svelte'" (click)="selectTech('frontend', 'Svelte')">
+            <span class="tech-title">SvelteKit</span>
+            <span class="tech-desc">High-Performance Compiler</span>
+          </div>
+          <div class="tech-card" [class.selected]="selectedFrontend === 'Tailwind HTML'" (click)="selectTech('frontend', 'Tailwind HTML')">
+            <span class="tech-title">Vanilla HTML + Tailwind</span>
+            <span class="tech-desc">Lightweight Static UI</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: Backend Technology -->
+      <div class="section-group">
+        <label class="section-title">Step 2: Select Backend & API Layer</label>
+        <div class="tech-grid">
+          <div class="tech-card" [class.selected]="selectedBackend === 'Spring Boot'" (click)="selectTech('backend', 'Spring Boot')">
+            <span class="tech-title">Spring Boot</span>
+            <span class="tech-desc">Java Enterprise REST API</span>
+          </div>
+          <div class="tech-card" [class.selected]="selectedBackend === 'Node.js'" (click)="selectTech('backend', 'Node.js')">
+            <span class="tech-title">Node.js (Express)</span>
+            <span class="tech-desc">JavaScript Lightweight API</span>
+          </div>
+          <div class="tech-card" [class.selected]="selectedBackend === 'NestJS'" (click)="selectTech('backend', 'NestJS')">
+            <span class="tech-title">NestJS</span>
+            <span class="tech-desc">TypeScript Scalable Backend</span>
+          </div>
+          <div class="tech-card" [class.selected]="selectedBackend === 'FastAPI'" (click)="selectTech('backend', 'FastAPI')">
+            <span class="tech-title">FastAPI</span>
+            <span class="tech-desc">Python High-Speed Async</span>
+          </div>
+          <div class="tech-card" [class.selected]="selectedBackend === 'Django'" (click)="selectTech('backend', 'Django')">
+            <span class="tech-title">Django</span>
+            <span class="tech-desc">Python Secure Monolith</span>
+          </div>
+          <div class="tech-card" [class.selected]="selectedBackend === '.NET Core'" (click)="selectTech('backend', '.NET Core')">
+            <span class="tech-title">C# .NET Core</span>
+            <span class="tech-desc">Microsoft Enterprise API</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: Database & ORM -->
+      <div class="section-group">
+        <label class="section-title">Step 3: Select Database & ORM</label>
+        <div class="tech-grid">
+          <div class="tech-card" [class.selected]="selectedDb === 'MySQL'" (click)="selectTech('db', 'MySQL')">
+            <span class="tech-title">MySQL</span>
+            <span class="tech-desc">Relational w/ Hibernate JPA</span>
+          </div>
+          <div class="tech-card" [class.selected]="selectedDb === 'PostgreSQL'" (click)="selectTech('db', 'PostgreSQL')">
+            <span class="tech-title">PostgreSQL</span>
+            <span class="tech-desc">Advanced SQL w/ Prisma ORM</span>
+          </div>
+          <div class="tech-card" [class.selected]="selectedDb === 'MongoDB'" (click)="selectTech('db', 'MongoDB')">
+            <span class="tech-title">MongoDB</span>
+            <span class="tech-desc">NoSQL Document Store</span>
+          </div>
+          <div class="tech-card" [class.selected]="selectedDb === 'H2 Database'" (click)="selectTech('db', 'H2 Database')">
+            <span class="tech-title">H2 In-Memory</span>
+            <span class="tech-desc">Instant Testing Database</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4: Project Prompt -->
+      <div class="section-group">
+        <label class="section-title">Step 4: Describe Your Application Prompt</label>
+        <textarea rows="4" placeholder="E.g., Build a women-centric ride-booking platform where female users can book rides, choose verified drivers, track live GPS location, and process secure payments..."></textarea>
+      </div>
+
+      <button class="generate-btn" (click)="startGeneration()">
+        ⚡ Generate End-to-End Project Architecture
+      </button>
     </div>
 
-    <!-- Backend Selection -->
-    <div class="form-group">
-      <label>Select Backend Technology:</label>
-      <select>
-        <optgroup label="Java Ecosystem">
-          <option value="springboot">Spring Boot (Java)</option>
-          <option value="quarkus">Quarkus (Java)</option>
-          <option value="micronaut">Micronaut (Java)</option>
-        </optgroup>
-        <optgroup label="Node.js & JavaScript">
-          <option value="nodejs-express">Node.js (Express.js)</option>
-          <option value="nestjs">NestJS (TypeScript)</option>
-          <option value="fastify">Fastify (Node.js)</option>
-        </optgroup>
-        <optgroup label="Python Ecosystem">
-          <option value="fastapi">FastAPI (Python)</option>
-          <option value="django">Django (Python)</option>
-          <option value="flask">Flask (Python)</option>
-        </optgroup>
-        <optgroup label="Other Languages">
-          <option value="go-gin">Go (Gin / Fiber)</option>
-          <option value="csharp-dotnet">C# (.NET Core Web API)</option>
-          <option value="php-laravel">PHP (Laravel)</option>
-          <option value="ruby-rails">Ruby on Rails</option>
-        </optgroup>
-      </select>
+    <!-- Live Real-Time Generation Screen (Simulates AI compiling) -->
+    <div class="generator-card compiling-card" *ngIf="isGenerating">
+      <h2>🚀 Generating Your Application...</h2>
+      <p class="status-text">{{ currentStatus }}</p>
+      <div class="progress-bar-container">
+        <div class="progress-bar" [style.width.%]="progressValue"></div>
+      </div>
+      <div class="specs-summary">
+        <p><strong>Frontend:</strong> {{ selectedFrontend }}</p>
+        <p><strong>Backend:</strong> {{ selectedBackend }}</p>
+        <p><strong>Database:</strong> {{ selectedDb }}</p>
+      </div>
     </div>
 
-    <!-- Database Selection -->
-    <div class="form-group">
-      <label>Select Database & ORM:</label>
-      <select>
-        <option value="mysql">MySQL / Hibernate JPA</option>
-        <option value="postgresql">PostgreSQL / Prisma / TypeORM</option>
-        <option value="mongodb">MongoDB / Mongoose</option>
-        <option value="h2">H2 Database (In-Memory)</option>
-        <option value="sqlite">SQLite</option>
-        <option value="firebase">Firebase Firestore</option>
-      </select>
+    <!-- Success Completion Screen -->
+    <div class="generator-card success-card" *ngIf="isCompleted">
+      <h2>✅ Project Successfully Generated!</h2>
+      <p>Your full-stack source code bundle has been created and compiled successfully.</p>
+      <div class="action-buttons">
+        <button class="primary-btn" (click)="downloadCode()">📥 Download Source Code (.zip)</button>
+        <button class="secondary-btn" (click)="resetApp()">🔄 Generate Another Project</button>
+      </div>
     </div>
-
-    <!-- Prompt Input -->
-    <div class="form-group">
-      <label>Project Idea / Prompt:</label>
-      <textarea rows="4" placeholder="E.g., Build an e-commerce platform for handmade crafts with secure user authentication, product catalog filtering, cart management, and order checkout tracking..."></textarea>
-    </div>
-
-    <button class="primary-btn">Generate End-to-End Project Code</button>
-  </div>
+  </main>
 </div>
