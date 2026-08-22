@@ -1,0 +1,36 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #f8fafc;
+  font-family: 'Inter', sans-serif;
+}
+
+/* This forces full screen and centers the card dead-center */
+.auth-wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.auth-card {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 420px;
+}
+
+.brand-logo { font-size: 26px; font-weight: 800; text-align: center; margin: 0; color: #0f172a; }
+.brand-logo span { color: #2563eb; }
+.tagline { font-size: 13px; color: #64748b; text-align: center; margin-bottom: 24px; }
+.form-group { margin-bottom: 16px; }
+.form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: #334155; }
+.form-group input { width: 100%; padding: 11px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; box-sizing: border-box; }
+.primary-btn { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; margin-top: 10px; }
+.primary-btn:hover { background: #1d4ed8; }
+.switch-auth { text-align: center; margin-top: 18px; font-size: 13px; color: #64748b; }
+.switch-auth a { color: #2563eb; text-decoration: none; font-weight: 600; }

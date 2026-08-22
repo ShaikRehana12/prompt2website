@@ -1,0 +1,19 @@
+<p>auth works!</p>
+<div class="auth-container">
+  <h2>Welcome to Prompt2Website</h2>
+  <form>
+    <div class="form-group">
+      <label>Email Address</label>
+      <input type="email" placeholder="Enter your email" required />
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" placeholder="Enter password" required />
+    </div>
+    <!-- <button type="submit" class="auth-btn">Sign In / Register</button> -->
+    <form (submit)="onLogin($event)">
+  <!-- inputs here -->
+  <button type="submit" class="auth-btn">Sign In / Register</button>
+</form>
+  </form>
+</div>
