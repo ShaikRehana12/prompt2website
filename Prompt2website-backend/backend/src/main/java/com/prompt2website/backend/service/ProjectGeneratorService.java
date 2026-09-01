@@ -15,12 +15,18 @@ public class ProjectGeneratorService {
     private ProjectRepository projectRepository;
 
     public Map<String, Object> generateProjectStructure(ProjectRequest request) {
-        // 1. Save to H2 database for history tracking
+        // 1. Save to database for history tracking (incorporating userId and projectName if provided)
         GeneratedProject savedProject = new GeneratedProject();
         savedProject.setPrompt(request.getPrompt());
         savedProject.setFrontend(request.getFrontend());
         savedProject.setBackend(request.getBackend());
         savedProject.setDatabase(request.getDatabase());
+        
+        // Save user reference if available in the updated request model
+        if (request.getUserId() != null) {
+            savedProject.setUserId(request.getUserId());
+        }
+        
         projectRepository.save(savedProject);
 
         // 2. Build the response structure
@@ -28,7 +34,13 @@ public class ProjectGeneratorService {
         response.put("status", "SUCCESS");
         response.put("message", "Project code and structure generated successfully!");
         response.put("projectId", savedProject.getId());
-        response.put("projectName", "Generated-App-" + savedProject.getId());
+        
+        // Use custom project name from request if given, otherwise fall back to generated name
+        String finalProjectName = (request.getProjectName() != null && !request.getProjectName().isEmpty()) 
+            ? request.getProjectName() 
+            : "Generated-App-" + savedProject.getId();
+            
+        response.put("projectName", finalProjectName);
         response.put("selectedFrontend", request.getFrontend());
         response.put("selectedBackend", request.getBackend());
         response.put("selectedDatabase", request.getDatabase());
@@ -36,17 +48,18 @@ public class ProjectGeneratorService {
         // 3. Generate a dynamic file tree based on user selections
         List<Map<String, String>> fileTree = new ArrayList<>();
         
-        // Frontend files (Angular preference)
+        // Frontend files (Angular standalone architecture support)
         if ("Angular".equalsIgnoreCase(request.getFrontend())) {
             fileTree.add(Map.of("path", "frontend/src/app/app.component.ts", "type", "file"));
-            fileTree.add(Map.of("path", "frontend/src/app/app.module.ts", "type", "file"));
+            fileTree.add(Map.of("path", "frontend/src/app/app.component.html", "type", "file"));
+            fileTree.add(Map.of("path", "frontend/src/app/app.config.ts", "type", "file"));
             fileTree.add(Map.of("path", "frontend/angular.json", "type", "file"));
         }
         
         // Backend files (Spring Boot)
         if ("Spring Boot".equalsIgnoreCase(request.getBackend())) {
             fileTree.add(Map.of("path", "backend/src/main/java/com/prompt2website/backend/BackendApplication.java", "type", "file"));
-            fileTree.add(Map.of("path", "backend/src/main/resources/application.properties", "type", "file"));
+            fileTree.add(Map.of("path", "backend/src/main/resources/application.properties (" + request.getDatabase() + " Setup)", "type", "file"));
             fileTree.add(Map.of("path", "backend/pom.xml", "type", "file"));
         }
 

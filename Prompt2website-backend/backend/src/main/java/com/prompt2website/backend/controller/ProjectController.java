@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map; // <-- Add this import
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -22,7 +22,7 @@ public class ProjectController {
             return ResponseEntity.badRequest().body(Map.of("error", "Prompt cannot be empty!"));
         }
 
-        var result = generatorService.generateProjectStructure(request);
+        Map<String, Object> result = generatorService.generateProjectStructure(request);
         return ResponseEntity.ok(result);
     }
 }
