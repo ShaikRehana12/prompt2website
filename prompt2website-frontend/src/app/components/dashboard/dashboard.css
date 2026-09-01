@@ -1,0 +1,211 @@
+body {
+  background-color: #f1f5f9;
+  color: #0f172a;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.app-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 40px;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.brand-logo {
+  font-size: 22px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.brand-logo span {
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.user-badge {
+  font-size: 12px;
+  background: #f8fafc;
+  padding: 6px 12px;
+  border-radius: 20px;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+  font-weight: 500;
+}
+
+.logout-btn {
+  background: transparent;
+  border: 1px solid #cbd5e1;
+  color: #475569;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.logout-btn:hover {
+  background: #fee2e2;
+  border-color: #fca5a5;
+  color: #dc2626;
+}
+
+/* Main Layout Card */
+.main-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.generator-card {
+  width: 100%;
+  max-width: 900px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
+}
+
+.card-header h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 6px 0;
+  color: #0f172a;
+}
+
+.card-header p {
+  color: #64748b;
+  font-size: 14px;
+  margin-bottom: 32px;
+}
+
+/* Section Grouping */
+.section-group {
+  margin-bottom: 28px;
+}
+
+.section-title {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #64748b;
+  margin-bottom: 12px;
+}
+
+/* Perfect Tech Grid */
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.tech-card {
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tech-card:hover {
+  border-color: #2563eb;
+  background: #f1f5f9;
+}
+
+.tech-card.selected {
+  border-color: #2563eb;
+  background: rgba(37, 99, 235, 0.06);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+.tech-title {
+  font-weight: 600;
+  font-size: 14px;
+  color: #0f172a;
+}
+
+.tech-desc {
+  font-size: 11px;
+  color: #64748b;
+}
+
+/* Textarea Prompt */
+textarea {
+  width: 100%;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 14px;
+  color: #0f172a;
+  font-size: 14px;
+  box-sizing: border-box;
+  resize: vertical;
+  font-family: inherit;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* Action Button */
+.generate-btn {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+  margin-top: 10px;
+}
+
+.generate-btn:hover {
+  opacity: 0.92;
+}
+
+.generate-btn:active {
+  transform: scale(0.99);
+}
+
+/* Responsive adjustment */
+@media (max-width: 768px) {
+  .tech-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
