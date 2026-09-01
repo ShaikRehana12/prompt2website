@@ -1,19 +1,65 @@
-<p>auth works!</p>
 <div class="auth-container">
-  <h2>Welcome to Prompt2Website</h2>
-  <form>
-    <div class="form-group">
-      <label>Email Address</label>
-      <input type="email" placeholder="Enter your email" required />
+  <div class="auth-card">
+    
+    <!-- STEP 1: LOGIN / SIGN UP FORM -->
+    <div *ngIf="authStep === 'FORM'">
+      <h2>{{ isSignUpMode ? 'Create Account' : 'Sign In' }}</h2>
+      <p class="subtitle">{{ isSignUpMode ? 'Enter your details to receive an email verification code' : 'Welcome back! Please enter your details.' }}</p>
+
+      <form (submit)="onSubmit($event)">
+        <div class="form-group" *ngIf="isSignUpMode">
+          <label>Full Name</label>
+          <input type="text" [(ngModel)]="formData.name" name="name" placeholder="Enter your full name" />
+        </div>
+
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" [(ngModel)]="formData.email" name="email" placeholder="you@example.com" required />
+        </div>
+
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" [(ngModel)]="formData.password" name="password" placeholder="••••••••" required />
+        </div>
+
+        <button type="submit" class="auth-btn">
+          {{ isSignUpMode ? 'Continue & Send OTP' : 'Sign In' }}
+        </button>
+      </form>
+
+      <div class="switch-mode">
+        <p>
+          {{ isSignUpMode ? 'Already have an account?' : "Don't have an account?" }}
+          <a href="javascript:void(0)" (click)="toggleMode()">
+            {{ isSignUpMode ? 'Sign In' : 'Create Account' }}
+          </a>
+        </p>
+      </div>
     </div>
-    <div class="form-group">
-      <label>Password</label>
-      <input type="password" placeholder="Enter password" required />
+
+    <!-- STEP 2: OTP VERIFICATION SCREEN -->
+    <div *ngIf="authStep === 'OTP'">
+      <h2>Verify Your Email</h2>
+      <p class="subtitle">We've sent a 6-digit confirmation code to <strong>{{ formData.email }}</strong></p>
+
+      <form (submit)="verifyOtp($event)">
+        <div class="form-group">
+          <label>Enter 6-Digit OTP Code</label>
+          <input type="text" [(ngModel)]="enteredOtp" name="otp" placeholder="123456" maxlength="6" required style="letter-spacing: 4px; font-weight: bold; text-align: center;" />
+        </div>
+
+        <button type="submit" class="auth-btn">
+          Verify & Complete Registration
+        </button>
+      </form>
+
+      <div class="switch-mode">
+        <p>
+          Didn't receive the code? 
+          <a href="javascript:void(0)" (click)="onSubmit($event)">Resend OTP</a>
+        </p>
+      </div>
     </div>
-    <!-- <button type="submit" class="auth-btn">Sign In / Register</button> -->
-    <form (submit)="onLogin($event)">
-  <!-- inputs here -->
-  <button type="submit" class="auth-btn">Sign In / Register</button>
-</form>
-  </form>
+
+  </div>
 </div>

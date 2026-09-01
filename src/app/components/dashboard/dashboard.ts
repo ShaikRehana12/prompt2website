@@ -1,57 +1,81 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, FormsModule, HttpClientModule],
   templateUrl: './dashboard.html',
-  styleUrl: './dashboard.css'
+  styleUrls: ['./dashboard.css']
 })
 export class DashboardComponent {
-  selectedFrontend = 'Angular';
-  selectedBackend = 'Spring Boot';
-  selectedDb = 'MySQL';
+  // Declare these state variables so the HTML can read them
+  selectedFrontend: string = 'Angular';
+  selectedBackend: string = 'Spring Boot';
+  selectedDb: string = 'H2';
+  userPrompt: string = '';
 
-  isGenerating = false;
-  isCompleted = false;
-  progressValue = 0;
-  currentStatus = 'Initializing project structure...';
+  isGenerating: boolean = false;
+  isCompleted: boolean = false;
+  currentStatus: string = 'Initializing code compiler...';
+  progressValue: number = 0;
+  generatedResult: any = null;
 
-  selectTech(category: string, value: string) {
-    if (category === 'frontend') this.selectedFrontend = value;
-    if (category === 'backend') this.selectedBackend = value;
-    if (category === 'db') this.selectedDb = value;
+  constructor(private http: HttpClient) {}
+
+  selectTech(type: string, value: string) {
+    if (type === 'frontend') this.selectedFrontend = value;
+    if (type === 'backend') this.selectedBackend = value;
+    if (type === 'db') this.selectedDb = value;
   }
 
   startGeneration() {
+    if (!this.userPrompt.trim()) {
+      alert('Please enter a project prompt description!');
+      return;
+    }
+
     this.isGenerating = true;
-    this.progressValue = 10;
-    
-    setTimeout(() => {
-      this.progressValue = 40;
-      this.currentStatus = `Compiling ${this.selectedFrontend} components & UI layout...`;
-    }, 1200);
+    this.progressValue = 30;
+    this.currentStatus = 'Sending architecture requirements to Spring Boot backend...';
 
-    setTimeout(() => {
-      this.progressValue = 75;
-      this.currentStatus = `Configuring ${this.selectedBackend} REST controllers & ${this.selectedDb} database schema...`;
-    }, 2800);
+    const payload = {
+      prompt: this.userPrompt,
+      frontend: this.selectedFrontend,
+      backend: this.selectedBackend,
+      database: this.selectedDb
+    };
 
-    setTimeout(() => {
-      this.progressValue = 100;
-      this.isGenerating = false;
-      this.isCompleted = true;
-    }, 4200);
+    this.http.post('http://localhost:8081/api/generate', payload).subscribe({
+      next: (response: any) => {
+        this.generatedResult = response;
+        this.progressValue = 100;
+        this.currentStatus = 'Build complete!';
+        
+        setTimeout(() => {
+          this.isGenerating = false;
+          this.isCompleted = true;
+        }, 1000);
+      },
+      error: (err) => {
+        console.error('Generation failed', err);
+        alert('Failed to connect to backend server on port 8081.');
+        this.isGenerating = false;
+        this.progressValue = 0;
+      }
+    });
   }
 
   downloadCode() {
-    alert('📥 Downloading full-stack project ZIP bundle...');
+    alert('Source code bundle download triggered!');
   }
 
   resetApp() {
     this.isCompleted = false;
+    this.userPrompt = '';
     this.progressValue = 0;
+    this.generatedResult = null;
   }
 }

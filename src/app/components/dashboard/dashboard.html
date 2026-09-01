@@ -1,19 +1,10 @@
 <div class="app-layout">
-  <!-- Top Navigation Header -->
-  <header class="navbar">
-    <div class="brand-logo">Prompt<span>2</span>Website</div>
-    <div class="nav-right">
-      <span class="user-badge">Workspace: Pro</span>
-      <button class="logout-btn" routerLink="/">Sign Out</button>
-    </div>
-  </header>
-
   <!-- Main Content Area -->
   <main class="main-container">
     <div class="generator-card" *ngIf="!isGenerating && !isCompleted">
       <div class="card-header">
         <h2>AI Full-Stack Generator</h2>
-        <p>Build your application step-by-step with enterprise-grade tech stacks.</p>
+        <p>Build your application step-by-step with enterprise-grade, decoupled tech stacks.</p>
       </div>
 
       <!-- Step 1: Frontend Technology -->
@@ -94,7 +85,7 @@
             <span class="tech-title">MongoDB</span>
             <span class="tech-desc">NoSQL Document Store</span>
           </div>
-          <div class="tech-card" [class.selected]="selectedDb === 'H2 Database'" (click)="selectTech('db', 'H2 Database')">
+          <div class="tech-card" [class.selected]="selectedDb === 'H2'" (click)="selectTech('db', 'H2')">
             <span class="tech-title">H2 In-Memory</span>
             <span class="tech-desc">Instant Testing Database</span>
           </div>
@@ -104,7 +95,11 @@
       <!-- Step 4: Project Prompt -->
       <div class="section-group">
         <label class="section-title">Step 4: Describe Your Application Prompt</label>
-        <textarea rows="4" placeholder="E.g., Build a women-centric ride-booking platform where female users can book rides, choose verified drivers, track live GPS location, and process secure payments..."></textarea>
+        <textarea 
+          [(ngModel)]="userPrompt" 
+          rows="4" 
+          placeholder="E.g., Build a women-centric ride-booking platform where female users can book rides, choose verified drivers, track live GPS location, and process secure payments...">
+        </textarea>
       </div>
 
       <button class="generate-btn" (click)="startGeneration()">
@@ -112,7 +107,7 @@
       </button>
     </div>
 
-    <!-- Live Real-Time Generation Screen (Simulates AI compiling) -->
+    <!-- Live Real-Time Generation Screen -->
     <div class="generator-card compiling-card" *ngIf="isGenerating">
       <h2>🚀 Generating Your Application...</h2>
       <p class="status-text">{{ currentStatus }}</p>
@@ -120,16 +115,32 @@
         <div class="progress-bar" [style.width.%]="progressValue"></div>
       </div>
       <div class="specs-summary">
-        <p><strong>Frontend:</strong> {{ selectedFrontend }}</p>
-        <p><strong>Backend:</strong> {{ selectedBackend }}</p>
-        <p><strong>Database:</strong> {{ selectedDb }}</p>
+        <p><strong>Frontend Choice:</strong> {{ selectedFrontend }}</p>
+        <p><strong>Backend Choice:</strong> {{ selectedBackend }}</p>
+        <p><strong>Database Choice:</strong> {{ selectedDb }}</p>
+        <p><strong>Prompt Statement:</strong> "{{ userPrompt }}"</p>
       </div>
     </div>
 
-    <!-- Success Completion Screen -->
+   <!-- Success Completion Screen -->
     <div class="generator-card success-card" *ngIf="isCompleted">
       <h2>✅ Project Successfully Generated!</h2>
-      <p>Your full-stack source code bundle has been created and compiled successfully.</p>
+      <p>Your full-stack source code bundle has been created and compiled successfully via Spring Boot.</p>
+      
+      <!-- Display Backend Response Data -->
+      <div class="specs-summary" *ngIf="generatedResult" style="text-align: left; margin: 20px 0; background: #f8f9fa; padding: 15px; border-radius: 8px;">
+        <p><strong>Project ID:</strong> {{ generatedResult.projectId }}</p>
+        <p><strong>Project Name:</strong> {{ generatedResult.projectName }}</p>
+        <p><strong>Message:</strong> {{ generatedResult.message }}</p>
+        
+        <h4 style="margin-top: 15px;">Generated File Structure:</h4>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+          <li *ngFor="let file of generatedResult.structure">
+            <code>{{ file.path }}</code>
+          </li>
+        </ul>
+      </div>
+
       <div class="action-buttons">
         <button class="primary-btn" (click)="downloadCode()">📥 Download Source Code (.zip)</button>
         <button class="secondary-btn" (click)="resetApp()">🔄 Generate Another Project</button>
