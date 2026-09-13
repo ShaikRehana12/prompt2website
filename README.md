@@ -1,124 +1,491 @@
-
 # 🚀 Prompt2Website
 
-**Prompt2Website** is an AI-powered full-stack engine that transforms a single text prompt and user-selected tech stacks into structured, downloadable web application architectures. Built with an enterprise Spring Boot backend and a modern Angular frontend, it bridges the gap between rapid ideation and production-ready scaffolding.
+### AI-Powered Full-Stack Project Generator
+
+**Prompt2Website** is a full-stack web application that transforms user requirements and selected technology stacks into a structured project architecture. The application combines an **Angular frontend** with a **Java Spring Boot backend** and **MySQL/H2 database integration** to provide an interactive project-generation workflow.
+
+The project demonstrates practical implementation of **REST APIs, Spring Boot, Angular, database integration, validation, authentication, error handling, and full-stack application architecture**.
 
 ---
 
-## 🛠️ Technology Stack
+## 📌 Project Overview
 
-* **Frontend:** Angular (Standalone Architecture), TypeScript, HTML5, CSS3, FormsModule, HttpClient
-* **Backend:** Spring Boot (Java), Spring Data JPA, REST Controllers
-* **Database:** H2 In-Memory Database / MySQL (for persistence and history logging)
-* **Tools & Hosting:** Vercel (Frontend), Git/GitHub (Version Control), Postman (API Testing)
+Prompt2Website allows users to:
+
+- Enter a project or business requirement using a natural-language prompt.
+- Select preferred frontend, backend, and database technologies.
+- Generate a structured project architecture based on the provided requirements.
+- View the generated project structure through an interactive UI.
+- Maintain project generation history through the backend.
+- Communicate between Angular and Spring Boot using REST APIs.
+
+The project demonstrates an end-to-end flow from **user input → Angular UI → REST API → Spring Boot service layer → database → structured response**.
 
 ---
 
 ## ✨ Key Features
 
-1. **Multi-Step Tech Stack Selection:** Choose your preferred Frontend framework (Angular, React, Vue, etc.), Backend API layer (Spring Boot, Node.js, FastAPI, etc.), and Database (MySQL, PostgreSQL, H2).
-2. **AI Prompt Engine:** Input custom business descriptions or feature prompts to automatically design project file architectures.
-3. **Real-Time Compilation UI:** Dynamic loading states, progress bars, and structured file-tree response displays.
-4. **History & Record Management:** Secure data logging and project tracking via the Spring Boot backend.
+### 👤 User Features
+
+- 📝 **Prompt-Based Project Generation**
+  - Enter business requirements or application ideas.
+  - Generate a structured project architecture from the provided prompt.
+
+- 🛠️ **Technology Stack Selection**
+  - Select preferred frontend, backend, and database technologies.
+  - Supports technology options configured within the application.
+
+- 🌳 **Project Structure Visualization**
+  - Displays the generated project structure in a structured file-tree format.
+
+- 📜 **Project History**
+  - Maintains project generation records through the backend.
+
+- 🔐 **Authentication & Validation**
+  - Handles user authentication and request validation.
+  - Provides appropriate validation and error responses.
 
 ---
 
-## 🏗️ Project Architecture
+## 🏗️ System Architecture
+
+```text
+                    ┌──────────────────────────┐
+                    │       User / Browser      │
+                    └────────────┬─────────────┘
+                                 │
+                                 ▼
+                    ┌──────────────────────────┐
+                    │     Angular Frontend      │
+                    │                          │
+                    │  Components              │
+                    │  Services                │
+                    │  Forms                   │
+                    │  HTTP Client              │
+                    └────────────┬─────────────┘
+                                 │
+                          HTTP / REST APIs
+                                 │
+                                 ▼
+                    ┌──────────────────────────┐
+                    │    Spring Boot Backend   │
+                    │                          │
+                    │  REST Controllers        │
+                    │          ↓               │
+                    │  Service Layer           │
+                    │          ↓               │
+                    │  Repository Layer        │
+                    └────────────┬─────────────┘
+                                 │
+                                 ▼
+                    ┌──────────────────────────┐
+                    │       Database           │
+                    │                          │
+                    │     MySQL / H2           │
+                    └──────────────────────────┘
+```
+
+---
+
+## 🔄 Application Flow
+
+```text
+User enters project requirement
+              │
+              ▼
+Select Technology Stack
+              │
+              ▼
+Angular Frontend
+              │
+              ▼
+REST API Request
+              │
+              ▼
+Spring Boot Controller
+              │
+              ▼
+Service Layer
+              │
+              ▼
+Project Generation Logic
+              │
+              ▼
+Database / History
+              │
+              ▼
+Structured API Response
+              │
+              ▼
+Angular UI
+              │
+              ▼
+Display Generated Project Structure
+```
+
+---
+
+## 🛠️ Technology Stack
+
+### Frontend
+
+- Angular
+- TypeScript
+- HTML5
+- CSS3
+- Angular Forms
+- Angular HttpClient
+
+### Backend
+
+- Java
+- Spring Boot
+- Spring MVC
+- Spring Data JPA
+- REST APIs
+
+### Database
+
+- MySQL
+- H2 Database
+
+### Development & Testing Tools
+
+- Git
+- GitHub
+- Postman
+- VS Code
+- Maven
+
+---
+
+## 🧩 Backend Architecture
+
+The Spring Boot backend follows a layered architecture:
+
+```text
+Prompt2website-backend/
+│
+└── src/
+    └── main/
+        └── java/
+            └── com/prompt2website/backend/
+                │
+                ├── controller/
+                │   └── REST API endpoints
+                │
+                ├── service/
+                │   └── Business logic
+                │
+                ├── repository/
+                │   └── Database operations
+                │
+                ├── model/
+                │   └── Entities & request/response models
+                │
+                └── configuration/
+                    └── Application configuration
+```
+
+### Request Flow
+
+```text
+Angular
+   ↓
+REST Controller
+   ↓
+Service Layer
+   ↓
+Repository
+   ↓
+MySQL / H2
+   ↓
+Response
+   ↓
+Angular UI
+```
+
+This layered approach helps maintain separation of concerns and keeps the backend modular and maintainable.
+
+---
+
+## 🎨 Frontend Architecture
+
+```text
+prompt2website-frontend/
+│
+└── src/
+    └── app/
+        │
+        ├── components/
+        │   └── dashboard/
+        │
+        ├── services/
+        │   └── API communication
+        │
+        ├── models/
+        │   └── Application data models
+        │
+        └── app.routes.ts
+            └── Application routing
+```
+
+The Angular frontend communicates with the Spring Boot backend through HTTP-based REST APIs.
+
+---
+
+## 🔌 REST API Integration
+
+The application follows a REST-based communication model between the frontend and backend.
+
+Example flow:
+
+```text
+Angular Component
+       │
+       ▼
+Angular Service
+       │
+       ▼
+HTTP Request
+       │
+       ▼
+Spring Boot REST Controller
+       │
+       ▼
+Service Layer
+       │
+       ▼
+Database
+       │
+       ▼
+JSON Response
+       │
+       ▼
+Angular UI
+```
+
+API endpoints can be tested and validated using **Postman**.
+
+---
+
+## 🧪 API Testing
+
+Postman is used for testing backend REST APIs.
+
+Testing includes:
+
+- Request/response validation
+- HTTP status code verification
+- Request payload validation
+- Error response testing
+- Backend API debugging
+
+---
+
+## 📸 Screenshots
+
+### 🏠 Prompt2Website Dashboard
+
+> Add your actual dashboard screenshot here.
+
+```markdown
+![Prompt2Website Dashboard](./screenshots/dashboard.png)
+```
+
+---
+
+### 🛠️ Technology Stack Selection
+
+> Add your technology selection screenshot here.
+
+```markdown
+![Technology Selection](./screenshots/technology-selection.png)
+```
+
+---
+
+### 🌳 Generated Project Structure
+
+> Add the generated project/file-tree screenshot here.
+
+```markdown
+![Generated Project Structure](./screenshots/generated-project.png)
+```
+
+---
+
+### 📜 Project History
+
+> Add your project history screenshot here.
+
+```markdown
+![Project History](./screenshots/project-history.png)
+```
+
+---
+
+## 📁 Recommended Project Structure
 
 ```text
 Prompt2Website/
 │
-├── prompt2website-frontend/   # Angular SPA Dashboard UI
-│   └── src/app/components/dashboard/ # Component, HTML, and CSS files
+├── prompt2website-frontend/
+│   ├── src/
+│   │   └── app/
+│   │       ├── components/
+│   │       ├── services/
+│   │       ├── models/
+│   │       └── app.routes.ts
+│   │
+│   └── package.json
 │
-└── Prompt2website-backend/    # Spring Boot REST API Engine
-    └── backend/src/main/java/com/prompt2website/backend/
-        ├── controller/        # REST Endpoints (/api/generate)
-        ├── model/             # Entity & Request Payloads
-        ├── repository/        # Database Repositories (JPA)
-        └── service/           # Project Generation Core Logic
+├── Prompt2website-backend/
+│   ├── src/
+│   │   └── main/
+│   │       ├── java/
+│   │       └── resources/
+│   │
+│   └── pom.xml
+│
+└── README.md
+```
 
 ---
 
-## ⚙️ Running the Project Locally
+# ⚙️ Getting Started
 
-### 1. Run the Spring Boot Backend
+## 1️⃣ Clone the Repository
 
-1. Navigate to the backend directory:
+```bash
+git clone <your-repository-url>
+cd Prompt2Website
+```
+
+---
+
+## 2️⃣ Start the Spring Boot Backend
+
+Navigate to the backend:
+
 ```bash
 cd Prompt2website-backend/backend
-
 ```
 
+Run the application:
 
-2. Start the Spring Boot application using Maven:
 ```bash
 mvn spring-boot:run
-
 ```
 
+The backend will start on the configured application port.
 
-*(The backend API will run on `http://localhost:8081`)*
+---
 
-### 2. Run the Angular Frontend
+## 3️⃣ Start the Angular Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.20.
+Navigate to the frontend:
 
-1. Navigate to the frontend directory:
 ```bash
 cd prompt2website-frontend
-
 ```
 
+Install dependencies:
 
-2. Install dependencies:
 ```bash
 npm install
-
 ```
 
+Start the Angular development server:
 
-3. Start the local development server:
 ```bash
 ng serve
-
 ```
 
-
-*(Open your browser at `http://localhost:4200/dashboard`. The application will automatically reload whenever you modify source files.)*
+Open the application in your browser using the configured frontend URL.
 
 ---
 
-## 🧪 Additional Angular CLI Commands
+# 🧰 Useful Development Commands
 
-* **Code Scaffolding:** Generate new components, directives, or pipes:
+### Install Angular Dependencies
+
 ```bash
-ng generate component component-name
-
+npm install
 ```
 
+### Start Angular Application
 
-* **Building for Production:** Compile your project into the `dist/` directory:
+```bash
+ng serve
+```
+
+### Build Angular Application
+
 ```bash
 ng build
-
 ```
 
+### Run Angular Tests
 
-* **Running Unit Tests:** Execute unit tests with [Vitest](https://vitest.dev/):
 ```bash
 ng test
-
 ```
 
+### Start Spring Boot Application
 
+```bash
+mvn spring-boot:run
+```
 
 ---
 
-## 📚 Additional Resources
+# 🔐 Technical Highlights
 
-For more information on using the Angular CLI, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Java-based backend development using **Spring Boot**
+- RESTful API development using **Spring MVC**
+- Layered **Controller → Service → Repository** architecture
+- Angular-based single-page application
+- Database integration using **Spring Data JPA**
+- MySQL/H2 database support
+- Request validation and error handling
+- REST API testing using **Postman**
+- Frontend-backend integration using HTTP/JSON
+- Git/GitHub-based version control
+- Modular and maintainable project structure
 
+---
+
+# 🚀 Future Enhancements
+
+Potential improvements for the project include:
+
+- 🤖 Integration with a production-grade Generative AI model
+- 📦 Downloadable project source-code generation
+- 🔐 Enhanced authentication and role-based authorization
+- ☁️ Cloud deployment
+- 🐳 Docker containerization
+- 🧪 Expanded automated test coverage
+- 📊 Advanced project history and management
+- 🔄 CI/CD pipeline integration
+
+---
+
+# 👩‍💻 About the Developer
+
+**Shaik Rehana**
+
+Java Full Stack Developer | Spring Boot | REST APIs | Angular | React.js | SQL
+
+Focused on building full-stack applications using Java, Spring Boot, REST APIs, modern frontend technologies, and relational/NoSQL databases.
+
+### Core Technologies
+
+```text
+Java • Spring Boot • REST APIs • Angular • React.js
+SQL • MySQL • MongoDB • Git • GitHub • Postman
 ```
 
-```
+---
+
+⭐ If you find this project useful, consider giving the repository a star!
